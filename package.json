@@ -1,0 +1,23 @@
+{
+  "name": "ticket-manager",
+  "version": "1.0.0",
+  "description": "In this weekend assignment you will br creating a ticket management sysystem using the MEAN Stack with the option to swap out AngularJS with jQuery. If you choose to use AngularJS, your controllers should use the '[controller as](https://docs.angularjs.org/api/ng/directive/ngController)' syntax.  Your app's index.html should load with a series of inputs with the following fields:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/courtneygives/Ticket-Manager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/courtneygives/Ticket-Manager/issues"
+  },
+  "homepage": "https://github.com/courtneygives/Ticket-Manager#readme",
+  "dependencies": {
+    "grunt": "^1.0.1"
+  }
+}

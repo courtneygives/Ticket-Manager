@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/courtneygives/Ticket-Manager#readme",
   "dependencies": {
-    "grunt": "^1.0.1"
+    "angular": "^1.5.3",
+    "bootstrap": "^3.3.6",
+    "express": "^4.13.4",
+    "grunt": "^1.0.1",
+    "mongoose": "^4.4.12"
   }
 }

@@ -1,19 +1,49 @@
 <!DOCTYPE html>
 <html ng-app="ticketmgr">
-  <head>
-    <meta charset="utf-8">
-    <title>Ticket Manager</title>
-    <link rel="stylesheet" href="views/bootstrap.min.css">
-    <link rel="stylesheet" href="views/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="views/styles.css">
-  </head>
-  <body>
-    <h1>Ticket Manager</h1>
-    <input ng-model="tixName" placeholder="hello"></input>
-    <input ng-model="tixType" placeholder="hello"></input>
-    <input ng-model="tixPriority" placeholder="hello"></input>
-    <input ng-model="tixDescription" placeholder="hello"></input>
-    <input ng-model="tixAssignee" placeholder="hello"></input>
-    <input ng-model="tixReporter" placeholder="hello"></input>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>Ticket Manager</title>
+  <script src="/vendor/angular/angular.min.js"></script>
+  <script src="/assets/scripts/client.min.js"></script>
+  <link rel="stylesheet" href="views/bootstrap.min.css">
+  <link rel="stylesheet" href="views/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="views/styles.css">
+</head>
+
+
+<body>
+  <h1>Ticket Manager</h1>
+
+  <div ng-controller="TixControl as tix">
+    <div class="ticketFields">
+      <h2>Create a new ticket</h2>
+      <ul>
+        Ticket Name:
+        <li><input type="text" ng-model="tix.name" placeholder="Title"></li>
+        Issue type:
+        <li><input type="dropdown" ng-model="tix.type" placeholder="Category or type"></li>
+        Priority:
+        <li><input type="number" ng-model="tix.priority" placeholder="5 = highest priority"></li>
+        Description:
+        <li><textarea name="Description" rows="8" cols="40" ng-model="tix.description" placeholder="Description"></textarea></li>
+        Assignee:
+        <li><input type="text" ng-model="tix.assignee" placeholder="George"></li>
+        Reporter:
+        <li><input type="text" ng-model="tix.reporter" placeholder="Courtney"></li>
+      </ul>
+      {{tix.name}}
+      <button type="button" ng-click = "tix.newEntry()">Save</button>
+
+    </div> <!-- Close ticketFields -->
+    <button type="button" ng-click="tix.allTickets()">Refresh</button>
+    <div class="ticket-grid" ng-repeat="thing in tix.tickets">
+      Issue: {{thing.name}}
+      <button type="button" ng-click="tix.deleteTicket(thing.tickets._id)">Delete</button>
+  </div>
+
+</div> <!-- Close controller -->
+
+
+
+</body>
 </html>

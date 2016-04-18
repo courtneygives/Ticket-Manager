@@ -23,6 +23,7 @@ Add buttons to each ticket to allow them to be removed (the button should read '
 ##Pro mode
 Allow all of the tickets fields to be updated and saved. Flow should be as follows:
 * 'Edit' button is clicked
+
 * Fields become editable
 * 'Edit' button is replaced by a 'Save' button
 * Edits are made

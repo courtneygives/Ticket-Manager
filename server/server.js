@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var indexRoutes = require('./routes/indexroutes');
 var bodyParser = require('body-parser');
 var app = express();
+var tickets = require('../models/models.js');
 
 var mongoURI = 'mongodb://localhost/ticketmgr';
 var MongoDB = mongoose.connect(mongoURI).connection;

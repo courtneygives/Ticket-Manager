@@ -2,20 +2,24 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var tixModel = new Schema ({
-  tixName: {
+  name: {
     type: String,
     required: true
   },
-  tixType: String,
-  tixPriority: {
+  type: String,
+  priority: {
     type: Number,
     min: 1,
     max: 5
   },
-  tixDescription: String,
-  tixAssignee: String,
-  tixReporter: {
+  description: String,
+  assignee: String,
+  reporter: {
     type: String,
     required: true
   }
 });
+
+var Tix = mongoose.model('Tix', tixModel);
+
+module.exports = Tix;

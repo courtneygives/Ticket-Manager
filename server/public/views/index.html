@@ -1,19 +1,63 @@
 <!DOCTYPE html>
-<html ng-app="ticketmgr">
-  <head>
-    <meta charset="utf-8">
-    <title>Ticket Manager</title>
-    <link rel="stylesheet" href="views/bootstrap.min.css">
-    <link rel="stylesheet" href="views/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="views/styles.css">
-  </head>
-  <body>
+<html ng-app="app">
+<head>
+  <meta charset="utf-8">
+  <title>Ticket Manager</title>
+  <script type="text/javascript" src="/assets/scripts/angular.min.js"></script>
+  <script type="text/javascript" src="/assets/scripts/client.min.js"></script>
+  <link rel="stylesheet" href="views/bootstrap.min.css">
+  <link rel="stylesheet" href="views/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="views/styles.css">
+</head>
+
+<body ng-controller="BehindCurtain as issue">
+
+  <!-- ::::::::: HEADER / HELLO AREA ::::::::: -->
+  <div class="hello-area">
     <h1>Ticket Manager</h1>
-    <input ng-model="tixName" placeholder="hello"></input>
-    <input ng-model="tixType" placeholder="hello"></input>
-    <input ng-model="tixPriority" placeholder="hello"></input>
-    <input ng-model="tixDescription" placeholder="hello"></input>
-    <input ng-model="tixAssignee" placeholder="hello"></input>
-    <input ng-model="tixReporter" placeholder="hello"></input>
-  </body>
+  </div>
+
+  <!-- ::::::::: TICKET MAKER ::::::::: -->
+  <div class="ticket-maker">
+    <input ng-model="issue.ticket.name" placeholder="Issue Title"/>
+    <input ng-model="issue.ticket.type" placeholder="Issue Category"/>
+    <div class="radio">
+      <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="1">1: Stop the Presses!</label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="optradio" ng-model="issue.priority" value="2">2: Urgent</label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="3">3: Make it Happen</label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="4">4: Maybe After Lunch</label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="1">5: This Would Be Nice</label>
+    </div>
+    <textarea ng-model="issue.ticket.description" placeholder="Enter a Description (And be nice to QA!)"></textarea>
+    <input ng-model="issue.ticket.assignee" placeholder="The Lucky Recipient"/>
+    <input ng-model="issue.ticket.reporter" placeholder="Whodunnit?"/>
+
+    <button ng-click="issue.newEntry()" type="button" class="btn btn-default">Save Ticket</button>
+  </div>
+
+  <!-- ::::::::: SAVED TICKETS GRID ::::::::: -->
+  <div class="saved-tickets">
+    <div class="saved-tix" ng-repeat="item in issue.issueList">
+      Issue: {{item.name}}
+      Priority: {{item.priority}}
+      Assignee: {{item.assignee}}
+    <ul ng-show()>
+      <li>Author: {{item.reporter}}</li>
+      <li>Date Created: {{}}</li>
+      <li>Issue Category: {{issue.type}}</li>
+      <li>Description: {{issue.description}}</li>
+    </ul>
+    <button ng-click="issue.deleteEntry(item._id)" type="button" class="btn btn-default">Delete Ticket</button>
+    </div>
+  </div>
+
+</body>
 </html>

@@ -13,51 +13,83 @@
 <body ng-controller="BehindCurtain as issue">
 
   <!-- ::::::::: HEADER / HELLO AREA ::::::::: -->
-  <div class="hello-area">
-    <h1>Ticket Manager</h1>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="hello-area">
+        <h1>Ticket Manager</h1>
+      </div>
+    </div>
   </div>
 
   <!-- ::::::::: TICKET MAKER ::::::::: -->
-  <div class="ticket-maker">
-    <input ng-model="issue.ticket.name" placeholder="Issue Title"/>
-    <input ng-model="issue.ticket.type" placeholder="Issue Category"/>
-    <div class="radio">
-      <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="1">1: Stop the Presses!</label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="optradio" ng-model="issue.priority" value="2">2: Urgent</label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="3">3: Make it Happen</label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="4">4: Maybe After Lunch</label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="1">5: This Would Be Nice</label>
-    </div>
-    <textarea ng-model="issue.ticket.description" placeholder="Enter a Description (And be nice to QA!)"></textarea>
-    <input ng-model="issue.ticket.assignee" placeholder="The Lucky Recipient"/>
-    <input ng-model="issue.ticket.reporter" placeholder="Whodunnit?"/>
 
-    <button ng-click="issue.newEntry()" type="button" class="btn btn-default">Save Ticket</button>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="ticket-maker">
+        <h2>Enter New Issue</h2>
+        <h3>Got an issue? Here's a tissue.</h3>
+        <input ng-model="issue.ticket.name" placeholder="Issue Title"/>
+        <input ng-model="issue.ticket.type" placeholder="Issue Category"/>
+        <div class="radio">
+          <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="1">1: Stop the Presses!</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="optradio" ng-model="issue.priority" value="2">2: Urgent</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="3">3: Make it Happen</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="4">4: Maybe After Lunch</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="1">5: This Would Be Nice</label>
+        </div>
+        <textarea ng-model="issue.ticket.description" placeholder="Enter a Description (And be nice to QA!)"></textarea>
+        <input ng-model="issue.ticket.assignee" placeholder="The Lucky Recipient"/>
+        <input ng-model="issue.ticket.reporter" placeholder="Whodunnit?"/>
+
+        <button ng-click="issue.newEntry()" type="button" class="btn btn-default">Save Ticket</button>
+        <button ng-click="issue.clearForm()" type="button" class="btn btn-default">Start Over</button>
+      </div>
+    </div> <!-- :: close row (ticket maker) :: -->
   </div>
+   <div class="container-fluid">
+  <div class="row">
+    <h2>Tickets in Progress</h2>
+    <h3>You have issues.</h3>
+
+  </div>
+</div>
 
   <!-- ::::::::: SAVED TICKETS GRID ::::::::: -->
-  <div class="saved-tickets">
-    <div class="saved-tix" ng-repeat="item in issue.issueList">
-      Issue: {{item.name}}
-      Priority: {{item.priority}}
-      Assignee: {{item.assignee}}
-    <ul ng-show()>
-      <li>Author: {{item.reporter}}</li>
-      <li>Date Created: {{}}</li>
-      <li>Issue Category: {{issue.type}}</li>
-      <li>Description: {{issue.description}}</li>
-    </ul>
-    <button ng-click="issue.deleteEntry(item._id)" type="button" class="btn btn-default">Delete Ticket</button>
-    </div>
-  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="saved-tickets">
 
+        <div class="saved-tix" ng-repeat="item in issue.issueList">
+          <div class="col-xs-6 col-md-4">
+          <ul>
+            <li>Issue: {{item.name}}</li>
+            <li>Priority: {{item.priority}}</li>
+            <li>Assignee: {{item.assignee}}</li>
+          </ul>
+
+          <button ng-click="issue.deleteEntry(item._id)" type="button" class="btn btn-default">Delete Ticket</button>
+          <p>Show all details: </p> <input type="checkbox" ng-model="moreInfo">
+          <div class="moreInfo" ng-show="moreInfo">
+            <ul>
+              <li>Author: {{item.reporter}}</li>
+              <li>Date Created: {{issue.created}}</li>
+              <li>Issue Category: {{issue.type}}</li>
+              <li>Description: {{issue.description}}</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </div><!-- :: close row (ticket grid) :: -->
+  </div>
 </body>
 </html>

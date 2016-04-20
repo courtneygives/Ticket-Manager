@@ -32,7 +32,10 @@ router.post('/add', function(request, response){
     priority: data.priority,
     description: data.description,
     assignee: data.assignee,
-    reporter: data.reporter
+    reporter: data.reporter,
+    date: data.date,
+    updated: data.updated,
+    update: data.update
   });
 
   issue.save(function(err){

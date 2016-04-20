@@ -17,7 +17,10 @@ var tixModel = new Schema ({
   reporter: {
     type: String,
     required: true
-  }
+  },
+  created: Date,
+  updated: Date,
+  update: String,
 });
 
 var Tix = mongoose.model('Tix', tixModel);

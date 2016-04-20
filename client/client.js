@@ -21,8 +21,10 @@ app.controller('BehindCurtain', ['$http', function($http){
     console.log('click!');
     console.log('Saving ' + issue.ticket.name);
     issue.issueList.push(issue.ticket);
-
+    var addDate = Date.now();
+    addDate = issue.ticket.date;
     $http.post('/add', issue.ticket).then(issue.getTix());
+    issue.clearForm();
   };
 
 
@@ -34,10 +36,23 @@ app.controller('BehindCurtain', ['$http', function($http){
   };
 
   // ::::::: CLEAR FORM ::::::: //
+  issue.clearForm = function() {
+    issue.ticket = {};
+  };
 
+  issue.getTix();
 
+  // var moreInfo = false;
 
-
-issue.getTix();
+  // issue.reveal = function(){
+  //   console.log('click!');
+  //   if (moreInfo === false){
+  //       moreInfo = true;
+  //   } else {
+  //     moreInfo = false;
+  //   }
+  //   console.log('?');
+  //
+  // };
   // ::::::::::::: CLOSE CONTROLLER :::::::::::: //
 }]);

@@ -6,6 +6,8 @@ app.controller('BehindCurtain', ['$http', function($http){
   issue.issueList = [];
   issue.ticket = {};
 
+  issue.thing = 1;
+
   // ::::::: GET ALL TICKETS ::::::: //
   issue.getTix = function(){
     return $http.get('/all').then(function(response){
@@ -14,6 +16,10 @@ app.controller('BehindCurtain', ['$http', function($http){
       issue.issueList = response.data;
 
     });
+  };
+
+  issue.setPriorty = function(priorty){
+    issue.ticket.priority = priority;
   };
 
   // ::::::: SAVE NEW TICKET ::::::: //

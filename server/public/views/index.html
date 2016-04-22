@@ -3,11 +3,14 @@
 <head>
   <meta charset="utf-8">
   <title>Ticket Manager</title>
-  <script type="text/javascript" src="/assets/scripts/angular.min.js"></script>
+  <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/vendor/angular/angular.min.js"></script>
   <script type="text/javascript" src="/assets/scripts/client.min.js"></script>
-  <link rel="stylesheet" href="views/bootstrap.min.css">
-  <link rel="stylesheet" href="views/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="views/styles.css">
+  <script type="text/javascript" src="/vendor/bootstrap/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="views/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="views/styles/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="views/styles/styles.css">
 </head>
 
 <body ng-controller="BehindCurtain as issue">
@@ -23,52 +26,83 @@
 
   <!-- ::::::::: TICKET MAKER ::::::::: -->
 
-  <div class="container-fluid">
+  <div class="ticket-maker container-fluid">
     <div class="row">
-      <div class="ticket-maker">
-        <h2>Enter New Issue</h2>
-        <h3>Got an issue? Here's a tissue.</h3>
-        <input ng-model="issue.ticket.name" placeholder="Issue Title"/>
-        <input ng-model="issue.ticket.type" placeholder="Issue Category"/>
-        <div class="radio">
-          <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="1">1: Stop the Presses!</label>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Enter New Issue</h3>
+          <p>Have an issue? Here's a tissue.</p>
         </div>
-        <div class="radio">
-          <label><input type="radio" name="optradio" ng-model="issue.priority" value="2">2: Urgent</label>
-        </div>
-        <div class="radio">
-          <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="3">3: Make it Happen</label>
-        </div>
-        <div class="radio">
-          <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="4">4: Maybe After Lunch</label>
-        </div>
-        <div class="radio">
-          <label><input type="radio" name="optradio" ng-model="issue.ticket.priority" value="1">5: This Would Be Nice</label>
-        </div>
-        <textarea ng-model="issue.ticket.description" placeholder="Enter a Description (And be nice to QA!)"></textarea>
-        <input ng-model="issue.ticket.assignee" placeholder="The Lucky Recipient"/>
-        <input ng-model="issue.ticket.reporter" placeholder="Whodunnit?"/>
-
-        <button ng-click="issue.newEntry()" type="button" class="btn btn-default">Save Ticket</button>
-        <button ng-click="issue.clearForm()" type="button" class="btn btn-default">Start Over</button>
       </div>
-    </div> <!-- :: close row (ticket maker) :: -->
-  </div>
-   <div class="container-fluid">
-  <div class="row">
-    <h2>Tickets in Progress</h2>
-    <h3>You have issues.</h3>
+      <div class="input-group">
+        <span class="input-group-addon">Issue</span>
+        <input ng-model="issue.ticket.name" type="text" class="form-control" placeholder="Short, descriptive issue name">
+      </div>
 
+      <div class="input-group">
+        <span class="input-group-addon">Category</span>
+        <input ng-model="issue.ticket.category" type="text" class="form-control" placeholder="Issue type, category, or other affiliation">
+      </div>
+
+
+
+      <div class="well well-sm">
+        Set Issue Priority:
+        <div class="btn-group-justified" data-toggle="buttons">
+          <label class="btn btn-primary">
+            <input type="radio" name="optradio" ng-click="issue.setPriorty(1)">1: Stop rhe Presses!</label>
+
+          <label class="btn btn-primary">
+            <input type="radio" name="optradio" ng-click="issue.setPriorty(2)">2: Urgent</label>
+
+          <label class="btn btn-primary">
+            <input type="radio" name="optradio" ng-click="issue.setPriorty(3)">3: Make It Happen</label>
+
+          <label class="btn btn-primary">
+            <input type="radio" name="optradio" ng-click="issue.setPriorty(4)">4: Maybe After Lunch</label>
+
+          <label class="btn btn-primary">
+            <input type="radio" name="optradio" ng-click="issue.setPriorty(5)">5: This Would Be Nice</label>
+        </div>
+      </div>
+      Model Value: {{issue.ticket}}
+
+
+      <div class="input-group">
+        <span class="input-group-addon">Category</span>
+        <textarea ng-model="issue.ticket.description" rows="8" cols="40" type="text" class="form-control" placeholder="Enter a description (And be nice to QA!)"></textarea>
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-addon">Assignee</span>
+        <input ng-model="issue.ticket.assignee" type="text" class="form-control" placeholder="The lucky recipient">
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-addon">Reporter</span>
+        <input ng-model="issue.ticket.reporter" type="text" class="form-control" placeholder="Whodunnit?">
+      </div>
+
+      <button ng-click="issue.newEntry()" type="button" class="btn btn-default">Save Ticket</button>
+      <button ng-click="issue.clearForm()" type="button" class="btn btn-default">Start Over</button>
+    </div>
+  </div> <!-- :: close row (ticket maker) :: -->
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Issue Queue</h3>
+    </div>
+    <div class="panel-body">
+      You have issues.
+    </div>
   </div>
-</div>
 
   <!-- ::::::::: SAVED TICKETS GRID ::::::::: -->
-  <div class="container-fluid">
+  <div class="ticket-grid container-fluid">
     <div class="row">
-      <div class="saved-tickets">
 
-        <div class="saved-tix" ng-repeat="item in issue.issueList">
-          <div class="col-xs-6 col-md-4">
+      <div class="saved-tix" ng-repeat="item in issue.issueList">
+        <div class="col-xs-6 col-md-4 well well-sm">
           <ul>
             <li>Issue: {{item.name}}</li>
             <li>Priority: {{item.priority}}</li>
@@ -85,11 +119,12 @@
               <li>Description: {{issue.description}}</li>
             </ul>
           </div>
-
+          <!-- http://stackoverflow.com/questions/20137496/
+          angular-js-ng-repeat-for-creating-grid -->
         </div>
       </div>
     </div>
-    </div><!-- :: close row (ticket grid) :: -->
-  </div>
+  </div><!-- :: close row (ticket grid) :: -->
+
 </body>
 </html>

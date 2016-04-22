@@ -27,9 +27,19 @@ module.exports = function(grunt) {
         src: [
           'angular/angular.min.js',
           'angular/angular.min.js.map',
-          'angular/angular-csp.css'
+          'angular/angular-csp.css',
+          'bootstrap/dist/js/bootstrap.min.js'
         ],
         dest: 'server/public/vendor/'
+      },
+      css : {
+        expand: true,
+        cwd: 'node_modules/',
+        src: [
+          'bootstrap/dist/css/bootstrap.min.js',
+          'bootstrap/dist/css/bootstrap-theme.min.js',
+        ],
+        dest: 'server/public/views/styles'
       }
     }
   });
